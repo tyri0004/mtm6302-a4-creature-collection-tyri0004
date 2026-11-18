@@ -46,6 +46,33 @@ const layoutSelect = document.querySelector("#layout");
 const collection = document.querySelector("#collection");
 const status = document.querySelector("#status");
 // 2. Use a loop to generate the creature entries. See START-HERE.md for markup.
+
+$creatures.forEach((creature) => {
+  const creatureItem = doucment.createElement("li");
+  creatureItem.classList.add("creature");
+
+  const creatureImage = document.createElement("img");
+  creatureImage.src = creature.image;
+  creatureImage.alt = creature.alt;
+  
+  const creatureInfo = document.createElement("div");
+  creatureInfo.classList.add("creature-info");
+
+  const creatureName = document.createElement("h3");
+  creatureName.textContent = creature.name;
+
+  const creatureDescription = document.createElement("p");
+  creatureDescription.classList.add("creature-description");
+  creatureDescription.textContent = creature.description;
+
+  creatureInfo.append(creatureName, creatureDescription);
+  creatureItem.append(creatureImage, creatureInfo);
+
+  collection.appendChild(creatureItem);
+
+}
+
+)
 // 3. Listen for changes to each preference control and update the appearance.
 // 4. Save both selected preferences to Local Storage.
 // 5. Check for saved data on load and restore the controls and appearance.
