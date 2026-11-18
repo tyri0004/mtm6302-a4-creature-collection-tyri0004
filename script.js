@@ -40,12 +40,14 @@ const $creatures = [
 
 // YOUR WORK: build these features using the supplied HTML, CSS, and data.
 // 1. Select the collection and preference controls.
+// Find the theme dropdown, layout dropdown, creature list, and status message.
 
 const themeSelect = document.querySelector("#theme");
 const layoutSelect = document.querySelector("#layout");
 const collection = document.querySelector("#collection");
 const status = document.querySelector("#status");
 // 2. Use a loop to generate the creature entries. See START-HERE.md for markup.
+// Go through each creature, create its image and text, and add it to the list.
 
 $creatures.forEach((creature) => {
   const creatureItem = document.createElement("li");
@@ -74,6 +76,7 @@ $creatures.forEach((creature) => {
 
 );
 // 3. Listen for changes to each preference control and update the appearance.
+// When a dropdown changes, update the matching page attribute.
 
 themeSelect.addEventListener("change", () => {
   document.body.dataset.theme = themeSelect.value;
@@ -83,6 +86,7 @@ layoutSelect.addEventListener("change", () => {
   collection.dataset.layout = layoutSelect.value;
 });
 // 4. Save both selected preferences to Local Storage.
+// Put both selected preferences into an object and save it as JSON.
 
 const storageKey = "mtm6302-a4-creature-preferences";
 
@@ -96,9 +100,12 @@ function savePreferences(){
 
   status.textContent = "Your preferences have been saved!";
 };
+themeSelect.addEventListener("change", savePreferences);
+layoutSelect.addEventListener("change", savePreferences);
 // 5. Check for saved data on load and restore the controls and appearance.
+// Check for saved preferences, restore both choices, or keep the defaults.
 
-const savedData = localStorage.getitem(storageKey);
+const savedData = localStorage.getItem(storageKey);
 
 if (savedData !== null){
   const savedPreferences = JSON.parse(savedData);
