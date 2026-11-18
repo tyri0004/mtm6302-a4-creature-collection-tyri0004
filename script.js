@@ -97,4 +97,20 @@ function savePreferences(){
   status.textContent = "Your preferences have been saved!";
 };
 // 5. Check for saved data on load and restore the controls and appearance.
+
+const savedData = localStorage.getitem(storageKey);
+
+if (savedData !== null){
+  const savedPreferences = JSON.parse(savedData);
+
+  themeSelect.value = savedPreferences.theme;
+  layoutSelect.value = savedPreferences.layout;
+
+  document.body.dataset.theme = savedPreferences.theme;
+  collection.dataset.layout = savedPreferences.layout;
+
+  status.textContent = "Your saved preferences have been restored!";
+} else{
+  status.textContent = "Welcome! Choose your preferences to make this collection yours.";
+}
 // Add short pseudocode comments before writing each feature.
