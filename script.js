@@ -48,7 +48,7 @@ const status = document.querySelector("#status");
 // 2. Use a loop to generate the creature entries. See START-HERE.md for markup.
 
 $creatures.forEach((creature) => {
-  const creatureItem = doucment.createElement("li");
+  const creatureItem = document.createElement("li");
   creatureItem.classList.add("creature");
 
   const creatureImage = document.createElement("img");
@@ -72,8 +72,29 @@ $creatures.forEach((creature) => {
 
 }
 
-)
+);
 // 3. Listen for changes to each preference control and update the appearance.
+
+themeSelect.addEventListener("change", () => {
+  document.body.dataset.theme = themeSelect.value;
+});
+
+layoutSelect.addEventListener("change", () => {
+  collection.dataset.layout = layoutSelect.value;
+});
 // 4. Save both selected preferences to Local Storage.
+
+const storageKey = "mtm6302-a4-creature-preferences";
+
+function savePreferences(){
+  const preferences = {
+    theme: themeSelect.value,
+    layout: layoutSelect.value
+  };
+
+  localStorage.setItem(storageKey, JSON.stringify(preferences));
+
+  status.textContent = "Your preferences have been saved!";
+};
 // 5. Check for saved data on load and restore the controls and appearance.
 // Add short pseudocode comments before writing each feature.
