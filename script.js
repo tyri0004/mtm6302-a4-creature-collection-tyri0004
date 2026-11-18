@@ -75,16 +75,10 @@ $creatures.forEach((creature) => {
 }
 
 );
-// 3. Listen for changes to each preference control and update the appearance.
+
+//3. Listen for changes and update the appearance and saved preferences.
 // When a dropdown changes, update the matching page attribute.
 
-themeSelect.addEventListener("change", () => {
-  document.body.dataset.theme = themeSelect.value;
-});
-
-layoutSelect.addEventListener("change", () => {
-  collection.dataset.layout = layoutSelect.value;
-});
 // 4. Save both selected preferences to Local Storage.
 // Put both selected preferences into an object and save it as JSON.
 
@@ -99,9 +93,16 @@ function savePreferences(){
   localStorage.setItem(storageKey, JSON.stringify(preferences));
 
   status.textContent = "Your preferences have been saved!";
-};
-themeSelect.addEventListener("change", savePreferences);
-layoutSelect.addEventListener("change", savePreferences);
+}
+themeSelect.addEventListener("change", () => {
+  document.body.dataset.theme = themeSelect.value;
+  savePreferences();
+});
+
+layoutSelect.addEventListener("change", () => {
+  collection.dataset.layout = layoutSelect.value;
+  savePreferences();
+});
 // 5. Check for saved data on load and restore the controls and appearance.
 // Check for saved preferences, restore both choices, or keep the defaults.
 
